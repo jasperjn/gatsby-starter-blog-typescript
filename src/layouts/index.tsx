@@ -1,9 +1,17 @@
-import React from 'react'
 import Link from 'gatsby-link'
+import React from 'react'
 
 import { rhythm, scale } from '../utils/typography'
 
-class Template extends React.Component {
+declare const __PREFIX_PATHS__: string | undefined
+declare const __PATH_PREFIX__: string | undefined
+
+interface TemplateProps {
+  location: Location
+  children: () => React.ReactNode
+}
+
+class Template extends React.Component<TemplateProps> {
   render() {
     const { location, children } = this.props
     let header
@@ -17,7 +25,7 @@ class Template extends React.Component {
       header = (
         <h1
           style={{
-            ...scale(1.5),
+            ...(scale(1.5) as React.CSSProperties),
             marginBottom: rhythm(1.5),
             marginTop: 0,
           }}

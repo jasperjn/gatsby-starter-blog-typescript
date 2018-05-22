@@ -1,12 +1,23 @@
-import React from 'react'
-import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
+import React from 'react'
+import Helmet from 'react-helmet'
 
 import Bio from '../components/Bio'
 import { rhythm, scale } from '../utils/typography'
 
-class BlogPostTemplate extends React.Component {
+interface BlogPostTemplateProps {
+  data: {
+    site: Site
+    markdownRemark: MarkdownRemark
+  }
+  pathContext: {
+    previous?: MarkdownRemark
+    next?: MarkdownRemark
+  }
+}
+
+class BlogPostTemplate extends React.Component<BlogPostTemplateProps> {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
@@ -18,7 +29,7 @@ class BlogPostTemplate extends React.Component {
         <h1>{post.frontmatter.title}</h1>
         <p
           style={{
-            ...scale(-1 / 5),
+            ...(scale(-1 / 5) as React.CSSProperties),
             display: 'block',
             marginBottom: rhythm(1),
             marginTop: rhythm(-1),
